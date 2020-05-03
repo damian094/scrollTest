@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>Document</title>
@@ -123,6 +124,7 @@
         transform: translateY(0%)
       }
     }
+
   </style>
 </head>
 
@@ -165,7 +167,7 @@
 
     //showing current article
     function currentArticle() {
-      if (window.scrollY > article1.offsetTop) {
+      if (window.scrollY > article1.offsetTop - 1) {
         headerP.textContent = 'O mnie'
       }
       if (window.scrollY > (article2.offsetTop - 100)) {
@@ -215,5 +217,8 @@
       window.scrollTo(0, 0)
     }
     exitHeader.addEventListener('click', goToNavigation)
+
   </script>
-</body></html>
+</body>
+
+</html>
