@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <script src="https://kit.fontawesome.com/afd9c31c73.js" crossorigin="anonymous"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      font-family: sans-serif;
+    }
+
+    :root {
+      --headerNavHeight: 75px;
+    }
+
+    .wrapper {
+      margin-top: 200px;
+      height: 600vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .wrapper div {
+      flex-grow: 1;
+      border-top: 3px solid red;
+      width: 100%;
+      background-color: #ddd;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 0px;
+      background-color: #444;
+      color: white;
+      text-transform: uppercase;
+      font-size: 30px;
+      overflow: hidden;
+      transition: .3s
+    }
+
+
+    header.show {
+      height: var(--headerNavHeight);
+    }
+
+    header div {
+      position: absolute;
+      top: 5px;
+      right: 20px;
+      height: 50px;
+      width: 50px
+    }
+
+    header div:hover {
+      color: orangered;
+    }
+
+    header div i {
+      position: absolute;
+      top: 50%;
+      left: 25%;
+      transform: translate(-50%, -50%);
+      font-size: 30px;
+      animation: 1.5s exitHeader linear infinite;
+    }
+
+    header div i:nth-child(2) {
+      top: 13px;
+    }
+
+    nav {
+      display: flex;
+      height: var(--headerNavHeight);
+      background-color: #444;
+    }
+
+    nav a {
+      display: flex;
+      flex-grow: 1;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      text-decoration: none;
+      text-transform: uppercase;
+      border: 1px solid;
+      transition: .2s
+    }
+
+    nav a:hover {
+      background-color: #333;
+      color: orangered;
+    }
+
+    div.main {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 50px;
+      font-weight: bold;
+    }
+
+    @keyframes exitHeader {
+      0% {
+        transform: translateY(0%)
+      }
+
+      50% {
+        transform: translateY(-30%)
+      }
+
+      100% {
+        transform: translateY(0%)
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <p></p>
+    <div>
+      <i class="fas fa-chevron-up"></i>
+      <i class="fas fa-chevron-up"></i>
+    </div>
+  </header>
+  <nav><a class="aboutMe">O mnie</a>
+    <a class="Projects">Projekty</a>
+    <a class="Skills">Umiejętności</a>
+    <a class="Contact">Kontakt</a></nav>
+  <div class="wrapper">
+    <div class="article1 main">About Me</div>
+    <div class="article2 main">Projects</div>
+    <div class="article3 main">Skills</div>
+    <div class="article4 main">Contact</div>
+
+  </div>
+  <script>
+    //showing header
+    const headerP = document.querySelector('header p')
+    const header = document.querySelector('header')
+    const article1 = document.querySelector('.article1')
+    const article2 = document.querySelector('.article2')
+    const article3 = document.querySelector('.article3')
+    const article4 = document.querySelector('.article4')
+
+    function showHideHeader() {
+      if (window.scrollY > article1.offsetTop - 1) {
+        header.classList.add('show')
+      } else if (window.scrollY < article1.offsetTop) {
+        header.classList.remove('show')
+      }
+
+    }
+
+    //showing current article
+    function currentArticle() {
+      if (window.scrollY > article1.offsetTop) {
+        headerP.textContent = 'O mnie'
+      }
+      if (window.scrollY > (article2.offsetTop - 100)) {
+        headerP.textContent = 'Projekty'
+      }
+      if (window.scrollY > article3.offsetTop - 100) {
+        headerP.textContent = 'Umiejętności'
+      }
+      if (window.scrollY > article4.offsetTop - 100) {
+        headerP.textContent = 'Kontakt'
+      }
+    }
+
+    window.addEventListener('scroll', currentArticle)
+    window.addEventListener('scroll', showHideHeader)
+
+    //scrolling to selected article
+    const navAboutMe = document.querySelector('.aboutMe')
+    const navProjects = document.querySelector('.Projects')
+    const navSkills = document.querySelector('.Skills')
+    const navContact = document.querySelector('.Contact')
+
+    function scrollToAboutMe() {
+      window.scrollTo(0, article1.offsetTop)
+    }
+
+    function scrollToProjects() {
+      window.scrollTo(0, article2.offsetTop)
+    }
+
+    function scrollToSkills() {
+      window.scrollTo(0, article3.offsetTop)
+    }
+
+    function scrollToContact() {
+      window.scrollTo(0, article4.offsetTop)
+    }
+    navAboutMe.addEventListener('click', scrollToAboutMe)
+    navProjects.addEventListener('click', scrollToProjects)
+    navSkills.addEventListener('click', scrollToSkills)
+    navContact.addEventListener('click', scrollToContact)
+
+    //scrolling to navigation
+    const exitHeader = document.querySelector('header div')
+
+    function goToNavigation() {
+      window.scrollTo(0, 0)
+    }
+    exitHeader.addEventListener('click', goToNavigation)
+  </script>
+</body></html>
